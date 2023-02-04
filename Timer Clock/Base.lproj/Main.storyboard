@@ -33,25 +33,27 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AQ1-Iv-ejt" userLabel="Middle">
                                 <rect key="frame" x="36.666666666666657" y="318" width="320" height="216"/>
                                 <subviews>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="LWQ-Bf-kWZ">
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" style="wheels" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LWQ-Bf-kWZ">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </datePicker>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="37" translatesAutoresizingMaskIntoConstraints="NO" id="yBU-9W-11c" userLabel="Bottom">
-                                <rect key="frame" x="0.0" y="712.33333333333337" width="393" height="105.66666666666663"/>
+                                <rect key="frame" x="0.0" y="681" width="393" height="137"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nol-1r-Iru">
-                                        <rect key="frame" x="142" y="0.0" width="109.33333333333331" height="34.333333333333336"/>
+                                        <rect key="frame" x="142" y="0.0" width="109.33333333333331" height="50"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Start Timer">
                                             <color key="baseForegroundColor" systemColor="systemBackgroundColor"/>
                                             <color key="baseBackgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="startTimer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TyS-6j-QJq"/>
+                                        </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dsX-b1-Fje">
-                                        <rect key="frame" x="176" y="71.333333333333258" width="41.333333333333343" height="34.333333333333343"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dsX-b1-Fje">
+                                        <rect key="frame" x="171.66666666666666" y="87" width="50" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -80,6 +82,9 @@
                     <connections>
                         <outlet property="backgroundImage" destination="98Z-Lz-Xso" id="UCL-ZP-i1u"/>
                         <outlet property="clock" destination="8fw-e9-kdk" id="wOo-g7-GC0"/>
+                        <outlet property="timeRemainingLabel" destination="dsX-b1-Fje" id="yLM-vw-I7z"/>
+                        <outlet property="timerButton" destination="Nol-1r-Iru" id="OtM-ne-vnG"/>
+                        <outlet property="timerPicker" destination="LWQ-Bf-kWZ" id="oHR-6D-ivC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
