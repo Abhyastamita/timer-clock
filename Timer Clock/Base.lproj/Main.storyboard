@@ -78,6 +78,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backgroundImage" destination="98Z-Lz-Xso" id="UCL-ZP-i1u"/>
                         <outlet property="clock" destination="8fw-e9-kdk" id="wOo-g7-GC0"/>
                     </connections>
                 </viewController>
