@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
 
@@ -21,6 +22,10 @@ class ViewController: UIViewController {
     var timerFormat = DateComponentsFormatter()
     var countDownTimer = Timer()
     var timeLeft : TimeInterval?
+    var musicPlaying = false
+    
+    var music : AVAudioPlayer?
+    var musicData = NSDataAsset(name: "music")?.data
     
     
     
@@ -30,17 +35,24 @@ class ViewController: UIViewController {
         
         clockFormat.dateFormat = "E, d MMM yyyy HH:mm:ss"
         amPm.dateFormat = "a"
+        timerFormat.allowedUnits = [.hour, .minute, .second]
+        timerFormat.unitsStyle = .positional
+        timerFormat.zeroFormattingBehavior = .pad
         // timerFormat.dateFormat = "HH:mm:ss"
         clockTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.passTime), userInfo: nil, repeats: true)
-        
+        music?.numberOfLoops = -1
     }
     
     @IBAction func startTimer(_ sender: UIButton) {
-        countDownTimer.invalidate()
-        timeLeft  = timerPicker.countDownDuration
-        
-        countDownTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startCountDown), userInfo: nil, repeats: true)
-        
+        if (musicPlaying == false) {
+            countDownTimer.invalidate()
+            timeLeft  = timerPicker.countDownDuration
+            
+            countDownTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startCountDown), userInfo: nil, repeats: true)
+        } else {
+            stopMusic()
+            timerButton.setTitle("Start Timer", for: .normal)
+        }
     }
     
     @objc func passTime() {
@@ -55,14 +67,32 @@ class ViewController: UIViewController {
     }
     
     @objc func startCountDown() {
-        timeRemainingLabel.text = timerFormat.string(from: timeLeft!)
+        let timeLeftString = timerFormat.string(from: timeLeft!)!
+        timeRemainingLabel.text = "Time Remaining: \(timeLeftString)"
         if timeLeft! >= 0 {
             timeLeft! -= 1
         } else {
             countDownTimer.invalidate()
+            playMusic()
+            timerButton.setTitle("Stop Music", for: .normal)
         }
     }
-
-
+    
+    func playMusic() {
+        do {
+            music = try AVAudioPlayer(data: musicData!)
+            music!.play()
+            musicPlaying = true
+            timeRemainingLabel.text = "\u{1F3B5} ~ \u{1F3B5} ~ \u{1F3B5}"
+        } catch {
+            timeRemainingLabel.text = "Can't play music."
+        }
+    }
+    
+    func stopMusic() {
+        music?.pause()
+        musicPlaying = false
+        timeRemainingLabel.text = ""
+    }
 }
 
